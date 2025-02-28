@@ -1,6 +1,6 @@
 -- a receita por estado do seller, por produto da categoria mais vendida
 
-select
+select 
     t2.seller_state,
     t1.product_id,
     t3.product_category_name,
@@ -61,7 +61,15 @@ where t4.flag_categoria = 1
 
 group by t2.seller_state,
          t1.product_id,
-         t3.product_category_name
+         t3.product_category_name;
 
 
-parei em 57:19
+    select 
+        t2.product_category_name,
+        1 as flag_categoria
+    from tb_order_items as t1
+    left join tb_products as t2
+    on t1.product_id = t2.product_id
+    group by t2.product_category_name
+    order by count(*) desc
+    limit 3
